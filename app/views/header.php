@@ -1,7 +1,7 @@
 <?php
 $currentPage = $_GET['page'] ?? 'dashboard';
 $pageTitles = [
-    'dashboard' => ['Dashboard', 'Vue d’ensemble RH et performance équipe'],
+    'dashboard' => ['Tableau de bord', 'Vue d’ensemble RH et performance équipe'],
     'liste' => ['Employés', 'Recherche, édition et gestion des profils'],
     'insererEmploye' => ['Ajouter un employé', 'Créer un nouveau profil collaborateur'],
     'edit' => ['Modifier un employé', 'Mettre à jour les informations du profil'],
@@ -33,11 +33,10 @@ function isActivePage($currentPage, $pages) {
 <div class="app-shell" id="appShell">
     <aside class="sidebar" id="appSidebar" aria-label="Navigation principale">
         <div class="sidebar__header">
-            <a class="brand" href="?page=dashboard" aria-label="Aller au dashboard">
+            <a class="brand" href="?page=dashboard" aria-label="Aller au tableau de bord">
                 <span class="brand__mark">F</span>
                 <span class="brand__copy">
                     <strong>FlowStaff</strong>
-                    <small>People OS</small>
                 </span>
             </a>
             <button class="icon-button sidebar__collapse" id="sidebarCollapse" type="button" aria-label="Réduire le menu">
@@ -46,10 +45,10 @@ function isActivePage($currentPage, $pages) {
         </div>
 
         <nav class="sidebar__nav">
-            <span class="sidebar__label">Workspace</span>
+            <span class="sidebar__label">Espace</span>
             <a class="sidebar__link<?php echo isActivePage($currentPage, 'dashboard'); ?>" href="?page=dashboard">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4v9Zm10 7h6V4h-6v16ZM4 20h6v-3H4v3Z"/></svg>
-                <span>Dashboard</span>
+                <span>Tableau de bord</span>
             </a>
             <a class="sidebar__link<?php echo isActivePage($currentPage, ['liste', 'edit']); ?>" href="?page=liste">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a4 4 0 1 0-3.5-5.94A5 5 0 1 0 9 13h6a5 5 0 0 0 1-2Zm-7 4c-3.31 0-6 1.79-6 4v1h12v-1c0-2.21-2.69-4-6-4Zm8 0c-.8 0-1.55.12-2.22.34 1.3.91 2.22 2.15 2.22 3.66v1h5v-1c0-2.21-2.24-4-5-4Z"/></svg>
@@ -57,7 +56,7 @@ function isActivePage($currentPage, $pages) {
             </a>
             <a class="sidebar__link<?php echo isActivePage($currentPage, 'insererEmploye'); ?>" href="?page=insererEmploye">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z"/></svg>
-                <span>Ajouter</span>
+                <span>Ajouter un employé</span>
             </a>
         </nav>
 

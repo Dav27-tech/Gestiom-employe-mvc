@@ -37,12 +37,12 @@ $initials = function ($name) {
         <h2>Bienvenue, gardez le pilotage RH clair et rapide.</h2>
         <p>Suivez la croissance de l’équipe, les salaires, les départements et les actions importantes depuis une interface calme et précise.</p>
         <div class="hero-actions">
-            <a class="btn btn-primary" href="?page=insererEmploye">Ajouter Employee</a>
+            <a class="btn btn-primary" href="?page=insererEmploye">Ajouter un employé</a>
             <a class="btn btn-secondary" href="?page=liste">Voir la liste</a>
         </div>
     </div>
     <div class="hero-insight">
-        <span class="insight-label">Team health</span>
+        <span class="insight-label">Santé de l’équipe</span>
         <strong><?php echo $totalEmployees > 0 ? 'Stable' : 'À configurer'; ?></strong>
         <div class="insight-ring">
             <span><?php echo $totalEmployees; ?></span>
@@ -56,7 +56,7 @@ $initials = function ($name) {
         <div class="kpi-icon">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a4 4 0 1 0-3.5-5.94A5 5 0 1 0 9 13h6a5 5 0 0 0 1-2Zm-7 4c-3.31 0-6 1.79-6 4v1h12v-1c0-2.21-2.69-4-6-4Z"/></svg>
         </div>
-        <span>Total Employees</span>
+        <span>Total employés</span>
         <strong><?php echo $totalEmployees; ?></strong>
         <div class="kpi-footer"><em>+12%</em><svg viewBox="0 0 120 30" aria-hidden="true"><path d="M2 24 C18 8, 30 28, 44 16 S72 7, 88 14 S106 22, 118 6"/></svg></div>
     </article>
@@ -65,7 +65,7 @@ $initials = function ($name) {
         <div class="kpi-icon kpi-icon--success">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </div>
-        <span>New This Month</span>
+        <span>Nouveaux ce mois</span>
         <strong><?php echo $newThisMonth; ?></strong>
         <div class="kpi-footer"><em>+8%</em><svg viewBox="0 0 120 30" aria-hidden="true"><path d="M2 20 C18 18, 22 8, 38 11 S70 22, 82 12 S102 4, 118 9"/></svg></div>
     </article>
@@ -74,7 +74,7 @@ $initials = function ($name) {
         <div class="kpi-icon kpi-icon--warning">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v4H4V6Zm0 8h7v4H4v-4Zm9 0h7v4h-7v-4Z"/></svg>
         </div>
-        <span>Departments</span>
+        <span>Départements</span>
         <strong><?php echo $departmentCount; ?></strong>
         <div class="kpi-footer"><em>Actifs</em><svg viewBox="0 0 120 30" aria-hidden="true"><path d="M2 16 C18 10, 34 14, 50 9 S84 8, 118 14"/></svg></div>
     </article>
@@ -83,7 +83,7 @@ $initials = function ($name) {
         <div class="kpi-icon kpi-icon--danger">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18h12M8 14h8M10 10h4M12 3v18"/></svg>
         </div>
-        <span>Average Salary</span>
+        <span>Salaire moyen</span>
         <strong>$<?php echo number_format($averageSalary, 0, ',', ' '); ?></strong>
         <div class="kpi-footer"><em>+3%</em><svg viewBox="0 0 120 30" aria-hidden="true"><path d="M2 22 C20 24, 32 12, 48 14 S70 18, 84 10 S104 6, 118 8"/></svg></div>
     </article>
@@ -94,8 +94,8 @@ $initials = function ($name) {
         <article class="panel chart-panel">
             <div class="panel-header">
                 <div>
-                    <span class="eyebrow">Analytics</span>
-                    <h3>Employee growth</h3>
+                    <span class="eyebrow">Analyses</span>
+                    <h3>Croissance des employés</h3>
                 </div>
                 <span class="pill">2026</span>
             </div>
@@ -119,8 +119,8 @@ $initials = function ($name) {
         <article class="panel">
             <div class="panel-header">
                 <div>
-                    <span class="eyebrow">People</span>
-                    <h3>Recent employees</h3>
+                    <span class="eyebrow">Équipe</span>
+                    <h3>Employés récents</h3>
                 </div>
                 <a class="text-link" href="?page=liste">Tout voir</a>
             </div>
@@ -129,11 +129,11 @@ $initials = function ($name) {
                     <thead>
                         <tr>
                             <th>Avatar</th>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Salary</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Nom</th>
+                            <th>Poste</th>
+                            <th>Salaire</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -169,25 +169,25 @@ $initials = function ($name) {
         <article class="panel quick-actions">
             <div class="panel-header">
                 <div>
-                    <span class="eyebrow">Shortcuts</span>
-                    <h3>Quick actions</h3>
+                    <span class="eyebrow">Raccourcis</span>
+                    <h3>Actions rapides</h3>
                 </div>
             </div>
             <a class="action-row" href="?page=insererEmploye">
                 <span>+</span>
-                <div><strong>Add Employee</strong><small>Créer un nouveau profil</small></div>
+                <div><strong>Ajouter un employé</strong><small>Créer un nouveau profil</small></div>
             </a>
             <a class="action-row" href="?page=liste">
                 <span>↓</span>
-                <div><strong>Export Data</strong><small>Préparer les données équipe</small></div>
+                <div><strong>Exporter les données</strong><small>Préparer les données équipe</small></div>
             </a>
         </article>
 
         <article class="panel">
             <div class="panel-header">
                 <div>
-                    <span class="eyebrow">Planning</span>
-                    <h3>Upcoming tasks</h3>
+                    <span class="eyebrow">Planification</span>
+                    <h3>Tâches à venir</h3>
                 </div>
             </div>
             <div class="task-list">
@@ -200,8 +200,8 @@ $initials = function ($name) {
         <article class="panel">
             <div class="panel-header">
                 <div>
-                    <span class="eyebrow">Activity</span>
-                    <h3>Recent activity</h3>
+                    <span class="eyebrow">Activité</span>
+                    <h3>Activité récente</h3>
                 </div>
             </div>
             <div class="activity-feed">

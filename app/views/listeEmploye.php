@@ -17,7 +17,7 @@
                     <th>Département</th>
                     <th>Salaire</th>
                     <th>Email</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
