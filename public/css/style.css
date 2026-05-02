@@ -1165,6 +1165,10 @@ svg path {
   gap: 8px;
 }
 
+.delete-form {
+  margin: 0;
+}
+
 .icon-btn {
   display: inline-grid;
   width: 38px;
@@ -1173,6 +1177,7 @@ svg path {
   border: 1px solid var(--line);
   border-radius: 12px;
   text-decoration: none;
+  cursor: pointer;
   transition:
     transform 0.2s ease,
     background-color 0.2s ease,

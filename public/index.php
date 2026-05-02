@@ -6,7 +6,7 @@ include "../app/models/Employe.php";
 
 $employe = new EmployeController();
 
-$page = $_POST['page'] ?? 'dashboard';
+$page = $_GET['page'] ?? 'dashboard';
 if($page == "insererEmploye"){
     $employe->displayAddEmploye();
 } elseif($page == "liste"){
@@ -22,5 +22,5 @@ if($page == "insererEmploye"){
 } elseif($page == "dashboard"){
     $employe->displayDashboard();
 } else {
-    $employe->displayDashard();
+    $employe->displayDashboard();
 }

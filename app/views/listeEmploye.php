@@ -33,7 +33,11 @@
                         <td>'.$employe['email'].'</td>
                         <td class="action-cell">'
                         .'<a class="icon-btn icon-edit" href="?page=edit&id='.$employe['id'].'" title="Modifier">✎</a>'
-                        .'<a class="icon-btn icon-delete" href="?page=delete&id='.$employe['id'].'" onclick="return confirm(\'Êtes-vous sûr?\')" title="Supprimer">🗑</a>'
+                        .'<form class="delete-form" method="POST" onsubmit="return confirm(\'Êtes-vous sûr?\')">'
+                        .'<input type="hidden" name="page" value="delete">'
+                        .'<input type="hidden" name="id" value="'.$employe['id'].'">'
+                        .'<button class="icon-btn icon-delete" type="submit" title="Supprimer">🗑</button>'
+                        .'</form>'
                         .'</td>
                         </tr>';
                     }

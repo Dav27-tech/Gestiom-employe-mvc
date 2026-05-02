@@ -27,7 +27,7 @@ class EmployeController extends Controller{
         $employe = new Employe();
         $employe->addEmployee($nom, $poste, $salaire, $departement, $email);
 
-        header("Location: ?page=liste");
+        $this->redirect("liste");
     }
 
     public function displayEditEmploye() {
@@ -47,14 +47,18 @@ class EmployeController extends Controller{
         $employe = new Employe();
         $employe->updateEmployee($id, $nom, $poste, $salaire, $departement, $email);
 
-        header("Location: ?page=liste");
+        $this->redirect("liste");
     }
 
     public function deleteEmploye() {
-        $id = $_GET["id"];
+        if ($_SERVER["REQUEST_METHOD"] !== "POST" || empty($_POST["id"])) {
+            $this->redirect("liste");
+        }
+
+        $id = $_POST["id"];
         $employe = new Employe();
         $employe->deleteEmployee($id);
 
-        header("Location: ?page=liste");
+        $this->redirect("liste");
     }
 }
