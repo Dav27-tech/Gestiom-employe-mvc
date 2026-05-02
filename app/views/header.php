@@ -79,6 +79,9 @@ function isActivePage($currentPage, $pages) {
                 <h1><?php echo $pageMeta[0]; ?></h1>
             </div>
             <div class="topbar__actions">
+                <?php if (isset($_SESSION['admin'])) : ?>
+                    <a class="btn btn-secondary btn-logout" href="?page=logout">Déconnexion</a>
+                <?php endif; ?>
                 <button id="themeToggle" class="theme-toggle" type="button" title="Changer de thème" aria-label="Changer de thème">
                     <span class="theme-icon">☾</span>
                 </button>

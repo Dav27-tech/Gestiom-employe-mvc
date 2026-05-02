@@ -447,6 +447,147 @@ svg path {
   color: var(--danger);
 }
 
+.btn-logout {
+  min-height: 40px;
+  padding-inline: 14px;
+}
+
+.auth-page {
+  min-height: 100vh;
+  padding: 32px 18px;
+}
+
+.auth-shell {
+  display: grid;
+  width: min(100%, 520px);
+  min-height: calc(100vh - 64px);
+  margin: 0 auto;
+  place-items: center;
+}
+
+.auth-panel {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  padding: 34px;
+  backdrop-filter: blur(20px);
+  animation: pageEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.auth-content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  color: var(--heading);
+  font-size: 1.05rem;
+  font-weight: 850;
+}
+
+.auth-brand .brand__mark {
+  flex-basis: 46px;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+}
+
+.auth-panel h1 {
+  margin: 0;
+  color: var(--heading);
+  font-size: 2.05rem;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.auth-panel p {
+  margin: 12px 0 26px;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.auth-message {
+  margin-bottom: 18px;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-weight: 750;
+}
+
+.auth-message--error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.auth-message--success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.auth-form {
+  gap: 18px;
+}
+
+.auth-form .form-field {
+  gap: 10px;
+}
+
+.auth-panel .auth-form input {
+  min-height: 52px;
+  border-radius: 14px;
+  padding-inline: 16px;
+}
+
+.auth-form .btn {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 6px;
+  border-radius: 14px;
+}
+
+@media (max-width: 860px) {
+  .auth-page {
+    padding: 22px 16px;
+  }
+
+  .auth-shell {
+    min-height: calc(100vh - 44px);
+  }
+
+  .auth-panel {
+    padding: 26px;
+  }
+
+  .auth-panel h1 {
+    font-size: 1.9rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .auth-panel {
+    padding: 22px;
+  }
+
+  .auth-brand {
+    margin-bottom: 26px;
+  }
+
+  .auth-panel h1 {
+    font-size: 1.75rem;
+  }
+
+  .auth-panel p {
+    margin-bottom: 24px;
+  }
+}
+
 .dashboard-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
