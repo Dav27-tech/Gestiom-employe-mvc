@@ -24,8 +24,9 @@ class EmployeController extends Controller{
         $salaire= $_POST["salaire"];
         $departement = $_POST["departement"];
         $email = $_POST["email"];
+        $sexe = $_POST["sexe"];
         $employe = new Employe();
-        $employe->addEmployee($nom, $poste, $salaire, $departement, $email);
+        $employe->addEmployee($nom, $poste, $salaire, $departement, $email, $sexe);
 
         $this->redirect("liste");
     }
@@ -44,8 +45,9 @@ class EmployeController extends Controller{
         $salaire= $_POST["salaire"];
         $departement = $_POST["departement"];
         $email = $_POST["email"];
+        $sexe = $_POST["sexe"];
         $employe = new Employe();
-        $employe->updateEmployee($id, $nom, $poste, $salaire, $departement, $email);
+        $employe->updateEmployee($id, $nom, $poste, $salaire, $departement, $email, $sexe);
 
         $this->redirect("liste");
     }

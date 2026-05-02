@@ -11,9 +11,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Nom</th>
                     <th>Poste</th>
+                    <th>Sexe</th>
                     <th>Département</th>
                     <th>Salaire</th>
                     <th>Email</th>
@@ -25,9 +25,9 @@
                 if(!empty($data)){
                     foreach($data as $employe){  
                         echo'<tr class="employee-row"> 
-                        <td>'.$employe['id'].'</td>
                         <td>'.$employe['nom'].'</td>
                         <td>'.$employe['poste'].'</td>
+                        <td>'.($employe['sexe'] ?? '').'</td>
                         <td>'.$employe['departement'].'</td>
                         <td>$'.$employe['salaire'].'</td>
                         <td>'.$employe['email'].'</td>

@@ -96,7 +96,8 @@ a {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -1133,7 +1134,8 @@ svg path {
 }
 
 .search-field input,
-.input-group input {
+.input-group input,
+.input-group select {
   width: 100%;
   min-height: 46px;
   border: 1px solid var(--line);
@@ -1149,7 +1151,8 @@ svg path {
 }
 
 .search-field input:focus,
-.input-group input:focus {
+.input-group input:focus,
+.input-group select:focus {
   border-color: color-mix(in srgb, var(--primary) 55%, var(--line));
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent);
 }

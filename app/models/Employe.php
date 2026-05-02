@@ -6,6 +6,7 @@ class Employe extends Model {
   public $salaire;
   public $departement;
   public $email;
+  public $sexe;
 
   public function getAllEmployee() {
     $requette = $this->db->prepare("SELECT * FROM tbl_employes");
@@ -13,29 +14,31 @@ class Employe extends Model {
     return $resultat = $requette -> fetchAll();
   }
 
-  public function addEmployee($nom, $poste, $salaire, $departement, $email) {
+  public function addEmployee($nom, $poste, $salaire, $departement, $email, $sexe) {
     $this->nom = $nom;
     $this->poste = $poste;
     $this->salaire = $salaire;
     $this->departement = $departement;
     $this->email = $email;
+    $this->sexe = $sexe;
 
     $requette = $this->db -> prepare("INSERT INTO tbl_employes 
-    (nom, poste, salaire, departement, email) VALUES (?, ?, ?, ?, ?)");
-    $requette -> execute([$this->nom, $this->poste, $this->salaire, $this->departement, $this->email]);
+    (nom, poste, salaire, departement, email, sexe) VALUES (?, ?, ?, ?, ?, ?)");
+    $requette -> execute([$this->nom, $this->poste, $this->salaire, $this->departement, $this->email, $this->sexe]);
   }
 
-  public function updateEmployee($id, $nom, $poste, $salaire, $departement, $email) {
+  public function updateEmployee($id, $nom, $poste, $salaire, $departement, $email, $sexe) {
     $this->id = $id;
     $this->nom = $nom;
     $this->poste = $poste;
     $this->salaire = $salaire;
     $this->departement = $departement;
     $this->email = $email;
+    $this->sexe = $sexe;
 
-    $requette = $this->db->prepare("UPDATE tbl_employes SET nom=?, poste=?, salaire=?, departement=?, email=?
+    $requette = $this->db->prepare("UPDATE tbl_employes SET nom=?, poste=?, salaire=?, departement=?, email=?, sexe=?
     WHERE id=?");
-    $requette->execute([$this->nom, $this->poste, $this->salaire, $this->departement, $this->email, $this->id]);
+    $requette->execute([$this->nom, $this->poste, $this->salaire, $this->departement, $this->email, $this->sexe, $this->id]);
   }
 
   public function getEmployeeById($id) {

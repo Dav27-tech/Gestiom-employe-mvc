@@ -24,6 +24,15 @@
         </div>
 
         <div class="form-field">
+            <label>Sexe</label>
+            <select name="sexe" required>
+                <option value="">Choisir le sexe</option>
+                <option value="Masculin" <?php echo ($data['sexe'] ?? '') === 'Masculin' ? 'selected' : ''; ?>>Masculin</option>
+                <option value="Féminin" <?php echo ($data['sexe'] ?? '') === 'Féminin' ? 'selected' : ''; ?>>Féminin</option>
+            </select>
+        </div>
+
+        <div class="form-field">
             <label>Département</label>
             <input type="text" name="departement" value="<?php echo $data['departement']; ?>" placeholder="Ex: Informatique" required>
         </div>

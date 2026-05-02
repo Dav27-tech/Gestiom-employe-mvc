@@ -23,6 +23,15 @@
         </div>
 
         <div class="form-field">
+            <label>Sexe</label>
+            <select name="sexe" required>
+                <option value="">Choisir le sexe</option>
+                <option value="Masculin">Masculin</option>
+                <option value="Féminin">Féminin</option>
+            </select>
+        </div>
+
+        <div class="form-field">
             <label>Département</label>
             <input type="text" name="departement" placeholder="Ex: Informatique" required>
         </div>
