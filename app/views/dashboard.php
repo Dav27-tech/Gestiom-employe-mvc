@@ -13,7 +13,17 @@ foreach ($employees as $employee) {
 
 $departmentCount = count($departments);
 $averageSalary = $totalEmployees > 0 ? round($salaryTotal / $totalEmployees) : 0;
-$newThisMonth = min($totalEmployees, 3);
+
+// calculate new hires for the current month from `created_at` if available
+$newThisMonth = 0;
+$now = new DateTime();
+$currentMonthKey = $now->format('Y-m');
+foreach ($employees as $emp) {
+    if (empty($emp['created_at'])) continue;
+    $dt = date_create($emp['created_at']);
+    if (!$dt) continue;
+    if ($dt->format('Y-m') === $currentMonthKey) $newThisMonth++;
+}
 $recentEmployees = array_slice($employees, 0, 5);
 $currentDate = date('d/m/Y');
 $esc = fn($value) => htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');

@@ -1067,6 +1067,32 @@ svg path {
   min-height: 250px;
 }
 
+/* Chart legend below growth chart: compact, evenly spaced labels */
+.chart-legend {
+  max-width: 560px;
+  margin: 8px auto 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.chart-legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.chart-legend-item strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--heading);
+  font-weight: 800;
+}
+
 .chart-grid {
   stroke: var(--line);
   stroke-width: 1;

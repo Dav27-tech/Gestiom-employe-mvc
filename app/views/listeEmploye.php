@@ -1,5 +1,15 @@
 <?php require __DIR__ . '/header.php'; ?>
 <?php $esc = fn($value) => htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8'); ?>
+<?php
+$initials = function ($name) {
+    $name = trim((string) $name);
+    if ($name === '') return 'FS';
+    $parts = preg_split('/\s+/', $name);
+    $first = substr($parts[0] ?? 'F', 0, 1);
+    $second = isset($parts[1]) ? substr($parts[1], 0, 1) : (isset($parts[0]) ? substr($parts[0], 1, 1) : 'S');
+    return strtoupper(($first ?: 'F') . ($second ?: 'S'));
+};
+?>
 <section class="table-card">
     <h2>Liste des employés</h2>
     <div class="table-toolbar">
@@ -12,6 +22,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Avatar</th>
                     <th>Nom</th>
                     <th>Poste</th>
                     <th>Sexe</th>
@@ -26,7 +37,9 @@
                 if(!empty($data)){
                     foreach($data as $employe){  
                         $id = $esc($employe['id'] ?? '');
+                        $avatar = $esc($initials($employe['nom'] ?? 'Flow Staff'));
                         echo'<tr class="employee-row"> 
+                        <td><span class="avatar">'.$avatar.'</span></td>
                         <td>'.$esc($employe['nom'] ?? '').'</td>
                         <td>'.$esc($employe['poste'] ?? '').'</td>
                         <td>'.$esc($employe['sexe'] ?? '').'</td>
@@ -43,9 +56,9 @@
                         .'</td>
                         </tr>';
                     }
-                    echo'<tr id="noSearchResult" class="empty-row" hidden><td colspan="7">Aucun employé ne correspond à votre recherche.</td></tr>';
+                    echo'<tr id="noSearchResult" class="empty-row" hidden><td colspan="8">Aucun employé ne correspond à votre recherche.</td></tr>';
                 }else{
-                    echo'<tr class="empty-row"><td colspan="7">Aucun employé!</td></tr>';    
+                    echo'<tr class="empty-row"><td colspan="8">Aucun employé!</td></tr>';    
                 }
                 ?>
             </tbody>
