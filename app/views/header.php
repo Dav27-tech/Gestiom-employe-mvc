@@ -89,3 +89,9 @@ function isActivePage($currentPage, $pages) {
         </header>
 
         <main class="main-content">
+            <?php if (isset($_SESSION['flash'])): ?>
+                <div class="flash flash-<?= htmlspecialchars($_SESSION['flash']['type']); ?>" role="status" aria-live="polite">
+                    <?= htmlspecialchars($_SESSION['flash']['message']); ?>
+                </div>
+                <?php unset($_SESSION['flash']); ?>
+            <?php endif; ?>

@@ -27,6 +27,7 @@ class EmployeController extends Controller{
         $sexe = $_POST["sexe"];
         $employe = new Employe();
         $employe->addEmployee($nom, $poste, $salaire, $departement, $email, $sexe);
+        $this->setFlash("Employé ajouté !", 'success');
 
         $this->redirect("liste");
     }
@@ -48,6 +49,7 @@ class EmployeController extends Controller{
         $sexe = $_POST["sexe"];
         $employe = new Employe();
         $employe->updateEmployee($id, $nom, $poste, $salaire, $departement, $email, $sexe);
+        $this->setFlash("Modifications enregistrées !", 'success');
 
         $this->redirect("liste");
     }
@@ -60,6 +62,7 @@ class EmployeController extends Controller{
         $id = $_POST["id"];
         $employe = new Employe();
         $employe->deleteEmployee($id);
+        $this->setFlash("Employé supprimé !", 'success');
 
         $this->redirect("liste");
     }

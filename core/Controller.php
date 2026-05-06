@@ -8,4 +8,14 @@ class Controller{
         header("Location: ?page=".$page);
         exit();
     }
+
+    public function setFlash($message, $type = 'success'){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['flash'] = [
+            'message' => $message,
+            'type' => $type
+        ];
+    }
 }

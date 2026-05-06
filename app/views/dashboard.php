@@ -100,6 +100,83 @@ $initials = function ($name) {
                 <span class="pill">2026</span>
             </div>
             <div class="growth-chart" aria-label="Graphique de croissance des employés">
+                <?php
+                // Build a dataset: prefer 'created_at' timeline; fallback to department counts
+                $hasCreated = false;
+                foreach ($employees as $e) {
+                    if (isset($e['created_at'])) { $hasCreated = true; break; }
+                }
+
+                $dataPoints = [];
+                $labels = [];
+
+                if ($hasCreated) {
+                    // last 6 months counts
+                    $now = new DateTime();
+                    $months = [];
+                    for ($i = 5; $i >= 0; $i--) {
+                        $m = (clone $now)->modify("-{$i} months");
+                        $key = $m->format('Y-m');
+                        $months[$key] = 0;
+                        $labels[] = $m->format('M');
+                    }
+                    foreach ($employees as $e) {
+                        if (empty($e['created_at'])) continue;
+                        $dt = date_create($e['created_at']);
+                        if (!$dt) continue;
+                        $k = $dt->format('Y-m');
+                        if (array_key_exists($k, $months)) $months[$k]++;
+                    }
+                    $dataPoints = array_values($months);
+                } else {
+                    // fallback: use department counts (up to 6 largest)
+                    arsort($departments);
+                    $deptSlice = array_slice($departments, 0, 6, true);
+                    foreach ($deptSlice as $d => $c) {
+                        $labels[] = substr($d,0,8);
+                        $dataPoints[] = $c;
+                    }
+                    // if empty, show total employees as single point
+                    if (empty($dataPoints)) { $labels = ['Now']; $dataPoints = [$totalEmployees]; }
+                }
+
+                // normalize to SVG coords
+                $w = 640; $h = 260; $padL = 40; $padR = 30; $padTop = 30; $padBottom = 30;
+                $plotW = $w - $padL - $padR; $plotH = $h - $padTop - $padBottom;
+                $count = count($dataPoints);
+                $max = max(1, max($dataPoints));
+
+                $points = [];
+                for ($i = 0; $i < $count; $i++) {
+                    $x = $padL + ($i / max(1, $count - 1)) * $plotW;
+                    // invert y: larger value -> smaller y coordinate
+                    $y = $padTop + ($plotH * (1 - ($dataPoints[$i] / $max)));
+                    $points[] = ['x' => round($x,2), 'y' => round($y,2)];
+                }
+
+                // create paths
+                $linePath = '';
+                $areaPath = '';
+                if (!empty($points)) {
+                    $linePath = 'M' . $points[0]['x'] . ' ' . $points[0]['y'];
+                    for ($i = 1; $i < count($points); $i++) {
+                        // simple smooth curve using quadratic Bezier midpoint
+                        $mx = ($points[$i-1]['x'] + $points[$i]['x'])/2;
+                        $my = ($points[$i-1]['y'] + $points[$i]['y'])/2;
+                        $linePath .= ' Q' . $points[$i-1]['x'] . ' ' . $points[$i-1]['y'] . ' ' . $mx . ' ' . $my;
+                    }
+                    // finish last segment to final point
+                    $last = end($points);
+                    $linePath .= ' T' . $last['x'] . ' ' . $last['y'];
+
+                    // area path: from first point down to baseline, across to last point, back up
+                    $areaPath = 'M' . $points[0]['x'] . ' ' . $points[0]['y'];
+                    for ($i = 1; $i < count($points); $i++) {
+                        $areaPath .= ' L' . $points[$i]['x'] . ' ' . $points[$i]['y'];
+                    }
+                    $areaPath .= ' L' . $last['x'] . ' ' . ($padTop + $plotH) . ' L' . $points[0]['x'] . ' ' . ($padTop + $plotH) . ' Z';
+                }
+                ?>
                 <svg viewBox="0 0 640 260" role="img">
                     <defs>
                         <linearGradient id="growthFill" x1="0" x2="0" y1="0" y2="1">
@@ -108,11 +185,21 @@ $initials = function ($name) {
                         </linearGradient>
                     </defs>
                     <path class="chart-grid" d="M40 40H610M40 100H610M40 160H610M40 220H610"/>
-                    <path class="chart-area" d="M40 205 C115 180, 125 145, 190 154 S285 195, 350 132 S455 82, 610 62 L610 230 L40 230 Z"/>
-                    <path class="chart-line-main" d="M40 205 C115 180, 125 145, 190 154 S285 195, 350 132 S455 82, 610 62"/>
-                    <circle cx="350" cy="132" r="5"/>
-                    <circle cx="610" cy="62" r="5"/>
+                    <?php if ($areaPath): ?>
+                        <path class="chart-area" d="<?php echo $areaPath; ?>" fill="url(#growthFill)" />
+                    <?php endif; ?>
+                    <?php if ($linePath): ?>
+                        <path class="chart-line-main" d="<?php echo $linePath; ?>" fill="none" />
+                    <?php endif; ?>
+                    <?php foreach ($points as $p): ?>
+                        <circle cx="<?php echo $p['x']; ?>" cy="<?php echo $p['y']; ?>" r="3" />
+                    <?php endforeach; ?>
                 </svg>
+                <div class="chart-legend">
+                    <?php foreach ($labels as $i => $lab): ?>
+                        <span class="chart-legend-item"><?php echo htmlspecialchars($lab); ?> <strong><?php echo $dataPoints[$i] ?? 0; ?></strong></span>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </article>
 
